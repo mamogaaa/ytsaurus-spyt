@@ -324,7 +324,7 @@ private[spark] object YTsaurusOperationManager extends Logging {
       val unpackArchivesCommands = applicationFiles(conf).map { file =>
         filePaths.add(file.toNode())
         file.unpackCommand
-      }.filter(cmd => cmd.isDefined)
+      }.filter(cmd => cmd.isDefined).map(cmd => cmd.get)
 
       val unpackArchivesCommand = if (unpackArchivesCommands.nonEmpty) {
         unpackArchivesCommands.mkString(" && ") + " &&"
